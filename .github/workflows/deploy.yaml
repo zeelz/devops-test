@@ -6,7 +6,10 @@ on:
 jobs:
     deploy:
         runs-on: ubuntu-latest
-        # defaults:
+        env:
+            DOCKER_USER: {{secrets.DOCKER_USER}}
+            DOCKER_PASSWORD: {{secrets.DOCKER_PASSWORD}}
+    # defaults:
         #     run:
         #         shell: bash
         #         working-directory: "app"
@@ -21,10 +24,10 @@ jobs:
               uses: docker/setup-docker-action@v4
 
             - name: docker build
-              run: docker build -t {{secrets.DOCKER_USER}}/node-app .
+              run: docker build -t $DOCKER_USER/node-app-devops-test .
 
             - name: docker login
-              run: docker login -u {{secrets.DOCKER_USER}} -p {{secrets.DOCKER_PASSWORD}}
+              run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
             - name: docker push
               run: docker push
