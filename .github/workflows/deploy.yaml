@@ -1,0 +1,36 @@
+name: "Deploy nodejs"
+
+on:
+    push
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                shell: bash
+                working-directory: "app"
+        steps:
+            - name: checkout
+              uses: actions/checkout@v4
+
+            - name: npm install
+              run: npm ci
+
+            - name: setup docker
+              uses: docker/setup-docker@v4
+
+            - name: docker build
+              run: docker build -t {{secrets.DOCKER_USER}}/node-app .
+
+            - name: docker login
+              run: docker login -u {{secrets.DOCKER_USER}} -p {{secrets.DOCKER_PASSWORD}}
+
+            - name: docker push
+              run: docker push
+
+            # aws cli configure
+
+            # terraform setup
+
+            # 
