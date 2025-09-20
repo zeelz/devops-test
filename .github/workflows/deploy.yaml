@@ -24,7 +24,7 @@ jobs:
               uses: docker/setup-docker-action@v4
 
             - name: docker build
-              run: docker build -t $DOCKER_USER/node-app-devops-test .
+              run: docker build -t "${DOCKER_USER}/node-app-devops-test" .
 
             - name: docker login
               run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
