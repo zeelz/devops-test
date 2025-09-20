@@ -30,7 +30,7 @@ jobs:
               run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
 
             - name: docker push
-              run: docker push
+              run: docker push ${DOCKER_USER}"/node-app-devops-test"
 
             # aws cli configure
 
