@@ -6,10 +6,10 @@ on:
 jobs:
     deploy:
         runs-on: ubuntu-latest
-        defaults:
-            run:
-                shell: bash
-                working-directory: "app"
+        # defaults:
+        #     run:
+        #         shell: bash
+        #         working-directory: "app"
         steps:
             - name: checkout
               uses: actions/checkout@v4
