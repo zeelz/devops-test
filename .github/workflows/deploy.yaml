@@ -36,4 +36,4 @@ jobs:
 
             # terraform setup
 
-            # 
+            # run terraform plan and apply -auto-approve
