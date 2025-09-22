@@ -40,6 +40,12 @@ resource "aws_security_group" "devops_test_sg" {
         to_port             = 22
         from_port           = 22
     }
+    egress {
+        cidr_blocks         = ["0.0.0.0/0"]
+        protocol            = "tcp"
+        to_port             = 0
+        from_port           = 65535
+    }
 }
 
 resource "aws_instance" "zeelz_db_ec2" {

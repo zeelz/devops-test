@@ -3,14 +3,12 @@
 # update yum repo
 sudo yum update -y
 
-# check docker yum repo
-sudo yum search docker
-
 # installing docker
-sudo yum install docker -y
+sudo amazon-linux-extras install docker -y
 
 # enable docker as a service
-systemctl enable --now docker
+sudo systemctl start docker
+sudo systemctl enable --now docker
 
 # add ec2-user to docker group
 sudo usermod -aG docker ec2-user
