@@ -8,6 +8,7 @@ on:
 
 jobs:
     provision_deploy:
+        if: github.event.workflow_run.conclusion == 'success'
         runs-on: ubuntu-latest
 
         steps:
@@ -30,13 +31,15 @@ jobs:
             - name: terraform setup
               uses: hashicorp/setup-terraform@v3
 
-            # run terraform init, plan and apply -auto-approve
-            - run: |
+            - name: mv files to root $GITHUB_WORKSPACE
+              run: |
                 mv terraform/* .
-            # terraform init -f terraform/main.tf
 
-            - run: |
-                cat user-data.sh
-            # terraform plan -f terraform/main.tf
+            - name: initial terraform
+              run: terraform init
 
-            # - run: terraform apply -auto-approve
+            - name: terraform plan
+              run: terraform plan -no-color
+
+            - name: terraform apply
+              run: terraform apply -auto-approve
