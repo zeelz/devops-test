@@ -32,12 +32,11 @@ jobs:
 
             # run terraform init, plan and apply -auto-approve
             - run: |
-                cd terraform
-                cat user-data.sh
-                # terraform init
+                mv terraform/* .
+            # terraform init -f terraform/main.tf
 
             - run: |
                 cat user-data.sh
-                # terraform plan
+            # terraform plan -f terraform/main.tf
 
             # - run: terraform apply -auto-approve
