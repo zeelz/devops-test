@@ -1,0 +1,43 @@
+name: Provision and deploy
+
+on:
+    workflow_run:
+        workflows: ["Build Push nodejs"]
+        types: completed
+        
+
+jobs:
+    provision_deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+
+            - name: checkout
+              uses: actions/checkout@v4
+              with:
+                # ref: ""
+                # path: ""
+                sparse-checkout: "terraform"
+                sparse-checkout-cone-mode: false
+
+            - name: Configure AWS Credentials
+              uses: aws-actions/configure-aws-credentials@v5.0.0
+              with:
+                aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                aws-region: us-east-1
+
+            - name: terraform setup
+              uses: hashicorp/setup-terraform@v3
+
+            # run terraform init, plan and apply -auto-approve
+            - run: |
+                cd terraform
+                cat user-data.sh
+                # terraform init
+
+            - run: |
+                cat user-data.sh
+                # terraform plan
+
+            # - run: terraform apply -auto-approve

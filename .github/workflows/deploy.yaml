@@ -1,4 +1,4 @@
-name: "Deploy nodejs"
+name: "Build Push nodejs"
 
 on:
     push
@@ -31,9 +31,3 @@ jobs:
 
             - name: docker push
               run: docker push ${DOCKER_USER}"/node-app-devops-test"
-
-            # aws cli configure
-
-            # terraform setup
-
-            # run terraform plan and apply -auto-approve
