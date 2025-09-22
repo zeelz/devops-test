@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # update yum repo
-sudo yum update -y
+sudo dnf update -y
 
 # installing docker
-sudo amazon-linux-extras install docker -y
+sudo dnf install -y docker
 
 # enable docker as a service
 sudo systemctl start docker
