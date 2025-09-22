@@ -5,6 +5,7 @@ on:
 
 jobs:
     deploy:
+        if: false
         runs-on: ubuntu-latest
         env:
             DOCKER_USER: ${{ secrets.DOCKER_USER }}
