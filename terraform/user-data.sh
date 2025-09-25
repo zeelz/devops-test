@@ -17,7 +17,7 @@ sudo usermod -aG docker ec2-user
 sudo newgrp docker
 
 # echo pull docker image
-docker pull zeelz/node-app-devops-test
+# docker pull zeelz/node-app-devops-test
 
 # echo run docker container
 docker run -d --restart unless-stopped -p 3300:3300 zeelz/node-app-devops-test
