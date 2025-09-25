@@ -5,7 +5,7 @@ on:
 
 jobs:
     deploy:
-        # if: false
+        if: false #disbled
         runs-on: ubuntu-latest
         env:
             DOCKER_USER: ${{ secrets.DOCKER_USER }}
