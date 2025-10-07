@@ -59,7 +59,7 @@ resource "aws_instance" "zeelz_db_ec2" {
 }
 
 variable "ZEELZ_MACHINE_SSH_PUBLIC_KEY" {
-  type = string # supplied from env var
+  type = string # supplied from env var with TF_VAR_ prefix
 }
 
 output "zeelz_db_ec2_ip" {
