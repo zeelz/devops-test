@@ -13,6 +13,8 @@ jobs:
     provision_deploy:
         # if: github.event.workflow_run.conclusion == 'success'
         runs-on: ubuntu-latest
+        env:
+          TF_VAR_ZEELZ_MACHINE_SSH_PUBLIC_KEY: ${{ secrets.ZEELZ_MACHINE_SSH_PUBLIC_KEY }}
 
         steps:
 
@@ -41,11 +43,11 @@ jobs:
             - name: initial terraform
               run: terraform init
 
-            - name: terraform plan
-              run: terraform plan -no-color
+            #- name: terraform plan
+            #  run: terraform plan -no-color
 
-            - name: terraform apply
-              run: terraform apply -auto-approve
+            #- name: terraform apply
+            #  run: terraform apply -auto-approve
 
-            #- name: terraform destroy
-            #  run: terraform destroy -auto-approve
+            - name: terraform destroy
+              run: terraform destroy -auto-approve

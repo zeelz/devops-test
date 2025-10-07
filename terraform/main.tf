@@ -21,7 +21,7 @@ provider "aws" {
 
 resource "aws_key_pair" "zeelz_db" {
     key_name   = "zeelz_db_ec2"
-    public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDGc5r67PYRiCxYDfTWPr7mrx5RdNySS7NOykqE1SzivWWDNofG2INI2gqDdhHqyqeMEqXornNIWWGYTpmz5KUBt4sFtxlZdTGI0uB5wCKUSsmwYDL5DTUhucegV8cQP9iv5QWfPWsqKrrXOTAqZSAREh+nT6jIAMYk3RHuqW5r1XtRv1Do6+WjTThn5iwOJUHnNcj2vCe4D+SCVSGvw4dOiOEmZQGY00rTkwVTzUfi+iSLe2gfPgnfK89Pe5+aLoVCDI0if1C7/KSuoZSt5+z2mgqJTyTHa6zpQC13itkuOeeZy4Z8+HfC6M1aPlXQ5a1koE9ZC1r/sdNAgtNi2UwuWnhgDTZu4OGYfhmm0/uNzVYgVpNIcIZObOOJItim2OC0aLoZgClJBEqlKkDJCUMje8uEi0icAISFRQSUicJAvvTlufpxQRWp8ujd9wV6bq7Xp7DJatQ8eZmV1rtDE3zpu4f0Wr3CaSUslf9bo9y2d6utD/SCsJfuNWMNHOMtatM= zeelz_db_ec2"
+    public_key = var.ZEELZ_MACHINE_SSH_PUBLIC_KEY
 }
 
 resource "aws_security_group" "devops_test_sg" {
@@ -56,6 +56,10 @@ resource "aws_instance" "zeelz_db_ec2" {
     key_name                        = aws_key_pair.zeelz_db.key_name
     associate_public_ip_address     = true
     user_data                       = file("${path.module}/user-data.sh")
+}
+
+variable "ZEELZ_MACHINE_SSH_PUBLIC_KEY" {
+  type = string # supplied from env var
 }
 
 output "zeelz_db_ec2_ip" {
