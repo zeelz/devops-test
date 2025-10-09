@@ -20,7 +20,7 @@ jobs:
 
         defaults:
           run:
-            working-directory: ./${{ TF_ROOT }}
+            working-directory: ${{ env.TF_ROOT }}
 
         steps:
 
