@@ -41,7 +41,9 @@ jobs:
             - name: mv files to root $GITHUB_WORKSPACE
               run: |
                 # mv terraform/* . # non-standard
-                cd $TF_ROOT
+                echo $TF_TOOT
+                cd ${TF_ROOT}
+                cat main.tf
 
             - name: initial terraform
               run: terraform init
@@ -52,5 +54,5 @@ jobs:
             #- name: terraform apply
             #  run: terraform apply -auto-approve
 
-            - name: terraform destroy
-              run: terraform destroy -auto-approve
+            #- name: terraform destroy
+            #  run: terraform destroy -auto-approve
