@@ -17,10 +17,10 @@ jobs:
           TF_VAR_ZEELZ_MACHINE_SSH_PUBLIC_KEY: ${{ secrets.ZEELZ_MACHINE_SSH_PUBLIC_KEY }}
           TF_VAR_VPC_ID_DEFAULT: ${{ secrets.VPC_ID_DEFAULT }}
           TF_ROOT: "terraform" # tis standard
-          
+
         defaults:
           run:
-            working-directory: ${TF_ROOT}
+            working-directory: $TF_ROOT
 
         steps:
 
