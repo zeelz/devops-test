@@ -17,6 +17,10 @@ jobs:
           TF_VAR_ZEELZ_MACHINE_SSH_PUBLIC_KEY: ${{ secrets.ZEELZ_MACHINE_SSH_PUBLIC_KEY }}
           TF_VAR_VPC_ID_DEFAULT: ${{ secrets.VPC_ID_DEFAULT }}
           TF_ROOT: "terraform" # tis standard
+          
+        defaults:
+          run:
+            working-directory: ${TF_ROOT}
 
         steps:
 
@@ -40,14 +44,10 @@ jobs:
 
             - name: mv files to root $GITHUB_WORKSPACE
               run: |
-                # mv terraform/* . # non-standard
+                # mv terraform/* . # non-standard. set a default workking-dir at job level
 
             - name: initial terraform
-              run: |
-                echo $TF_TOOT
-                cd ${TF_ROOT}
-                cat main.tf
-                terraform init
+              run: terraform init
 
             #- name: terraform plan
             #  run: terraform plan -no-color
