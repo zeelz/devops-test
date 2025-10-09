@@ -26,13 +26,19 @@ resource "aws_key_pair" "zeelz_db" {
 
 resource "aws_security_group" "devops_test_sg" {
     name      = "devops_test_sg"
-    vpc_id    = "vpc-04f9481b7c282ba7b" #aws_vpc.main.id #
+    vpc_id    = var.VPC_ID_DEFAULT #aws_vpc.main.id #
 
     ingress {
         cidr_blocks         = ["0.0.0.0/0"]
         protocol            = "tcp"
         to_port             = 3300
         from_port           = 3300
+    }
+    ingress {
+        cidr_blocks         = ["0.0.0.0/0"]
+        protocol            = "tcp"
+        to_port             = 5500
+        from_port           = 5500
     }
     ingress {
         cidr_blocks         = ["0.0.0.0/0"]
@@ -59,9 +65,13 @@ resource "aws_instance" "zeelz_db_ec2" {
 }
 
 variable "ZEELZ_MACHINE_SSH_PUBLIC_KEY" {
-  type = string # supplied from env var with TF_VAR_ prefix
+    type                     = string # supplied from env var with TF_VAR_ prefix
+}
+
+variable "VPC_ID_DEFAULT" {
+    type                     = string
 }
 
 output "zeelz_db_ec2_ip" {
-    value = aws_instance.zeelz_db_ec2.public_ip
+    value                  = aws_instance.zeelz_db_ec2.public_ip
 }
