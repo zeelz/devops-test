@@ -43,10 +43,11 @@ jobs:
                 # mv terraform/* . # non-standard
                 echo $TF_TOOT
                 cd ${TF_ROOT}
-                cat main.tf
 
             - name: initial terraform
-              run: terraform init
+              run: |
+                cat main.tf
+                terraform init
 
             #- name: terraform plan
             #  run: terraform plan -no-color
