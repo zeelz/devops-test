@@ -41,11 +41,11 @@ jobs:
             - name: mv files to root $GITHUB_WORKSPACE
               run: |
                 # mv terraform/* . # non-standard
-                echo $TF_TOOT
-                cd ${TF_ROOT}
 
             - name: initial terraform
               run: |
+                echo $TF_TOOT
+                cd ${TF_ROOT}
                 cat main.tf
                 terraform init
 
