@@ -16,6 +16,7 @@ jobs:
         env: # TF_VAR_ values are auto injected into tf input variables 
           TF_VAR_ZEELZ_MACHINE_SSH_PUBLIC_KEY: ${{ secrets.ZEELZ_MACHINE_SSH_PUBLIC_KEY }}
           TF_VAR_VPC_ID_DEFAULT: ${{ secrets.VPC_ID_DEFAULT }}
+          TF_ROOT: "terraform" # tis standard
 
         steps:
 
@@ -39,16 +40,17 @@ jobs:
 
             - name: mv files to root $GITHUB_WORKSPACE
               run: |
-                mv terraform/* .
+                # mv terraform/* . # non-standard
+                cd $TF_ROOT
 
             - name: initial terraform
               run: terraform init
 
-            - name: terraform plan
-              run: terraform plan -no-color
+            #- name: terraform plan
+            #  run: terraform plan -no-color
 
-            - name: terraform apply
-              run: terraform apply -auto-approve
+            #- name: terraform apply
+            #  run: terraform apply -auto-approve
 
-            #- name: terraform destroy
-            #  run: terraform destroy -auto-approve
+            - name: terraform destroy
+              run: terraform destroy -auto-approve
